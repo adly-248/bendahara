@@ -1,0 +1,12 @@
+#slideTable_length > label > select {
+    width: 60px !important;       /* kasih sedikit lebar biar lega */
+    padding: 6px 10px;            /* padding biar nyaman */
+    border-radius: 6px;           /* sudut rounded */
+    transition: all 0.2s ease;    /* animasi hover */
+    margin-bottom: 5px;
+}
+
+#slideTable_length > label > select:hover {
+    border-color: #800000;        /* warna hover sesuai tema bendahara */
+    box-shadow: 0 0 5px rgba(128,0,0,0.3);
+}
