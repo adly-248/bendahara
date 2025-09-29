@@ -64,11 +64,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 0;
+            margin: 0;
             position: relative;
+            overflow-x: hidden;
         }
 
-        /* body::before {
+        body::before {
             content: '';
             position: absolute;
             top: 0;
@@ -78,14 +80,25 @@
             background: radial-gradient(circle at 20% 80%, rgba(220, 20, 60, 0.2) 0%, transparent 50%),
                 radial-gradient(circle at 80% 20%, rgba(255, 182, 193, 0.3) 0%, transparent 50%);
             pointer-events: none;
-        } */
+        }
 
+        /* Override default Laravel styling */
+        * {
+            box-sizing: border-box;
+        }
+
+        .min-h-screen,
+        .bg-gray-100,
+        .bg-gray-50 {
+            background: transparent !important;
+        }
 
         .login-container {
-            background: #ffffff;
-            /* warna putih solid */
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
             border-radius: 24px;
             box-shadow: 0 20px 40px rgba(220, 20, 60, 0.2);
+            border: 1px solid rgba(220, 20, 60, 0.1);
             padding: 48px 40px;
             width: 100%;
             max-width: 450px;
@@ -238,11 +251,13 @@
         /* Mobile Responsive */
         @media (max-width: 480px) {
             body {
-                padding: 15px;
+                padding: 0;
             }
 
             .login-container {
                 padding: 32px 24px;
+                margin: 15px;
+                max-width: calc(100% - 30px);
             }
 
             .logo-container svg,
