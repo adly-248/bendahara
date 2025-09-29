@@ -4,7 +4,7 @@
 
         <!-- Form Filter -->
         <form method="GET" action="{{ route('laporan.pemasukkan') }}" class="mb-4">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
                 <!-- Filter Bulan -->
                 <select name="month" class="form-control">
                     <option value="">-- Pilih Bulan --</option>
@@ -25,7 +25,14 @@
                     @endfor
                 </select>
 
-                <button type="submit" class="btn btn-primary">Filter</button>
+                <!-- Tombol Filter -->
+                <button type="submit" class="btn btn-primary w-full">Filter</button>
+
+                <!-- Tombol Print -->
+                <a href="{{ route('laporan.pemasukkan.print', ['month' => request('month'), 'year' => request('year')]) }}"
+                    target="_blank" class="btn btn-danger w-full">
+                    Print PDF
+                </a>
             </div>
         </form>
 
@@ -46,7 +53,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $row->tanggal_pemasukkan }}</td>
-                            <td>{{ $row->kategori }}</td>
+                            <td>{{ ucwords(str_replace('_', ' ', $row->kategori)) }}</td>
                             <td>{{ $row->transaksi }}</td>
                             <td>Rp {{ number_format($row->jumlah_pemasukkan, 0, ',', '.') }}</td>
                         </tr>

@@ -496,7 +496,9 @@
             </p>
 
             <div class="ratio ratio-16x9 video-frame">
-                <iframe src="https://www.youtube.com/embed/ID_VIDEO" title="Panduan Penggunaan Web Bendahara"
+                <iframe width="560" height="315" src="https://youtu.be/k5LgdbYGRUs?si=4Hb6750mibZwaH70"
+                    title="Panduan Penggunaan Web Bendahara" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen>
                 </iframe>
             </div>

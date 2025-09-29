@@ -42,7 +42,7 @@
 
             <!-- Navigation -->
             <nav class="p-4 flex-1">
-                <ul class="space-y-2">
+                <ul class="space-y-2 list-none">
                     <li>
                         <a href="{{ url('usermenu') }}"
                             class="flex items-center p-3 rounded-lg hover:bg-red-700 transition-colors group">
@@ -67,7 +67,7 @@
                             <span class="font-medium">Pengeluaran</span>
                         </a>
                     </li>
-                    <li x-data="{ open: false }">
+                    <li x-data="{ open: {{ Request::is('laporan*') ? 'true' : 'false' }} }">
                         <!-- Menu Utama -->
                         <button @click="open = !open"
                             class="w-full flex items-center justify-between p-3 rounded-lg hover:bg-red-700 transition-colors">
@@ -79,24 +79,27 @@
                         </button>
 
                         <!-- Submenu -->
-                        <ul x-show="open" x-transition class="pl-6 mt-2 space-y-2">
+                        <ul x-show="open" x-transition class="pl-6 mt-2 space-y-2 list-none">
                             <li>
                                 <a href="{{ url('laporan') }}"
-                                    class="flex items-center p-2 rounded-lg hover:bg-red-700 transition-colors group">
+                                    class="flex items-center p-2 rounded-lg transition-colors group
+                        {{ Request::is('laporan') ? 'bg-red-700 text-white' : 'hover:bg-red-700' }}">
                                     <i class="fa-solid fa-file-invoice text-sm mr-3 text-blue-300"></i>
                                     <span class="font-medium">Laporan Akhir</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('laporan.pemasukkan') }}"
-                                    class="flex items-center p-2 rounded-lg hover:bg-red-700 transition-colors group">
+                                    class="flex items-center p-2 rounded-lg transition-colors group
+                        {{ Request::is('laporan/pemasukkan') ? 'bg-red-700 text-white' : 'hover:bg-red-700' }}">
                                     <i class="fa-solid fa-chart-line text-sm mr-3 text-green-400"></i>
                                     <span class="font-medium">Laporan Pemasukkan</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('laporan.pengeluaran') }}"
-                                    class="flex items-center p-2 rounded-lg hover:bg-red-700 transition-colors group">
+                                    class="flex items-center p-2 rounded-lg transition-colors group
+                        {{ Request::is('laporan/pengeluaran') ? 'bg-red-700 text-white' : 'hover:bg-red-700' }}">
                                     <i class="fa-solid fa-chart-line text-sm mr-3 text-red-400"></i>
                                     <span class="font-medium">Laporan Pengeluaran</span>
                                 </a>
@@ -122,7 +125,6 @@
                 </ul>
             </nav>
         </aside>
-
     </div>
 
     <script>

@@ -221,44 +221,81 @@ class LaporanController extends Controller
     }
 
     public function pemasukkan(Request $request)
-{
-    $month = $request->input('month');
-    $year  = $request->input('year');
+    {
+        $month = $request->input('month');
+        $year  = $request->input('year');
 
-    $query = Pemasukkan::query();
+        $query = Pemasukkan::query();
 
-    if ($month) {
-        $query->whereMonth('tanggal_pemasukkan', $month);
-    }
-    if ($year) {
-        $query->whereYear('tanggal_pemasukkan', $year);
-    }
+        if ($month) {
+            $query->whereMonth('tanggal_pemasukkan', $month);
+        }
+        if ($year) {
+            $query->whereYear('tanggal_pemasukkan', $year);
+        }
 
-    $data = $query->get();
-    $total = $query->sum('jumlah_pemasukkan');
+        $data = $query->get();
+        $total = $query->sum('jumlah_pemasukkan');
 
-    return view('laporan.pemasukkan', compact('data', 'total', 'month', 'year'));
-}
-
-
-public function pengeluaran(Request $request)
-{
-    $month = $request->input('month');
-    $year  = $request->input('year');
-
-    $query = Pengeluaran::query();
-
-    if ($month) {
-        $query->whereMonth('tanggal_pengeluaran', $month);
-    }
-    if ($year) {
-        $query->whereYear('tanggal_pengeluaran', $year);
+        return view('laporan.pemasukkan', compact('data', 'total', 'month', 'year'));
     }
 
-    $data = $query->get();
-    $total = $query->sum('jumlah_pengeluaran');
 
-    return view('laporan.pengeluaran', compact('data', 'total', 'month', 'year'));
-}
+    public function pengeluaran(Request $request)
+    {
+        $month = $request->input('month');
+        $year  = $request->input('year');
 
+        $query = Pengeluaran::query();
+
+        if ($month) {
+            $query->whereMonth('tanggal_pengeluaran', $month);
+        }
+        if ($year) {
+            $query->whereYear('tanggal_pengeluaran', $year);
+        }
+
+        $data = $query->get();
+        $total = $query->sum('jumlah_pengeluaran');
+
+        return view('laporan.pengeluaran', compact('data', 'total', 'month', 'year'));
+    }
+    public function printPemasukkan(Request $request)
+    {
+        $query = \App\Models\Pemasukkan::query();
+
+        if ($request->month) {
+            $query->whereMonth('tanggal_pemasukkan', $request->month);
+        }
+
+        if ($request->year) {
+            $query->whereYear('tanggal_pemasukkan', $request->year);
+        }
+
+        $data = $query->get();
+        $total = $data->sum('jumlah_pemasukkan');
+
+        $pdf = Pdf::loadView('laporan.print_pemasukkan', compact('data', 'total'));
+        return $pdf->stream('laporan_pemasukkan.pdf');
+    }
+
+     public function printPengeluaran(Request $request)
+    {
+        $query = Pengeluaran::query();
+
+        if ($request->month) {
+            $query->whereMonth('tanggal_pengeluaran', $request->month);
+        }
+        if ($request->year) {
+            $query->whereYear('tanggal_pengeluaran', $request->year);
+        }
+
+        $data = $query->get();
+        $total = $data->sum('jumlah_pengeluaran');
+
+        $pdf = Pdf::loadView('laporan.print_pengeluaran', compact('data', 'total'))
+                  ->setPaper('a4', 'portrait');
+
+        return $pdf->stream('laporan_pengeluaran.pdf');
+    }
 }

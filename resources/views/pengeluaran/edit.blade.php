@@ -31,11 +31,16 @@
                         value="{{ $pengeluaran->id_pengeluaran }}" readonly>
                 </div>
 
-                <!-- Jumlah Pengeluaran -->
                 <div class="mb-3">
                     <label for="jumlah_pengeluaran" class="form-label">Jumlah Pengeluaran</label>
-                    <input type="number" name="jumlah_pengeluaran" class="form-control"
-                        value="{{ $pengeluaran->jumlah_pengeluaran }}" required>
+
+                    <!-- input tampilan -->
+                    <input type="text" id="jumlah_pengeluaran" class="form-control"
+                        value="{{ 'Rp ' . number_format($pengeluaran->jumlah_pengeluaran, 0, ',', '.') }}" required>
+
+                    <!-- input hidden untuk angka asli -->
+                    <input type="hidden" name="jumlah_pengeluaran" id="jumlah_pengeluaran_hidden"
+                        value="{{ $pengeluaran->jumlah_pengeluaran }}">
                 </div>
 
                 <!-- Tanggal Pengeluaran -->
@@ -111,6 +116,36 @@
             </form>
         </div>
     </div>
+
+    <script>
+        const inputRupiah = document.getElementById("jumlah_pengeluaran");
+        const inputHidden = document.getElementById("jumlah_pengeluaran_hidden");
+
+        // Format ulang pas user ketik
+        inputRupiah.addEventListener("input", function() {
+            let angka = this.value.replace(/[^,\d]/g, "");
+            inputHidden.value = angka; // simpan angka mentah
+            this.value = formatRupiah(angka, "Rp ");
+        });
+
+        // Fungsi format Rupiah
+        function formatRupiah(angka, prefix) {
+            let number_string = angka.replace(/[^,\d]/g, "").toString(),
+                split = number_string.split(","),
+                sisa = split[0].length % 3,
+                rupiah = split[0].substr(0, sisa),
+                ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+            if (ribuan) {
+                let separator = sisa ? "." : "";
+                rupiah += separator + ribuan.join(".");
+            }
+
+            rupiah = split[1] !== undefined ? rupiah + "," + split[1] : rupiah;
+            return prefix ? prefix + rupiah : rupiah;
+        }
+    </script>
+
 </x-app-layout>
 
 <style>

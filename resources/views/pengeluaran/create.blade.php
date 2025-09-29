@@ -2,7 +2,7 @@
     /* Card styling */
     .custom-card {
         border-radius: 1rem;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
         padding: 1.5rem;
     }
 
@@ -19,8 +19,9 @@
         padding: 0.75rem 1rem;
         font-size: 0.95rem;
     }
+
     .custom-card .form-control:focus {
-        box-shadow: 0 0 0 3px rgba(59,130,246,0.3);
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
         border-color: #3b82f6;
     }
 
@@ -33,9 +34,11 @@
         border-radius: 0.5rem;
         transition: background-color 0.2s ease;
     }
+
     .custom-card .btn-primary:hover {
         background-color: #2563eb;
     }
+
     .custom-card .btn-secondary {
         padding: 0.6rem 1.2rem;
         font-size: 0.95rem;
@@ -70,7 +73,10 @@
 
             <div class="mb-3">
                 <label for="jumlah_pengeluaran" class="form-label">Jumlah Pengeluaran</label>
-                <input type="text" name="jumlah_pengeluaran" class="form-control" required>
+                <!-- input untuk tampilan -->
+                <input type="text" id="jumlah_pengeluaran" class="form-control" required>
+                <!-- input hidden untuk dikirim ke database -->
+                <input type="hidden" name="jumlah_pengeluaran" id="jumlah_pengeluaran_hidden">
             </div>
 
             <div class="mb-3">
@@ -118,28 +124,35 @@
     </div>
 
     <script>
-    const inputRupiah = document.getElementById("jumlah_pengeluaran");
+        const inputRupiah = document.getElementById("jumlah_pengeluaran");
+        const inputHidden = document.getElementById("jumlah_pengeluaran_hidden");
 
-    inputRupiah.addEventListener("input", function() {
-        // Ambil angka saja tanpa huruf/titik/koma
-        let angka = this.value.replace(/[^,\d]/g, "").toString();
-        this.value = formatRupiah(angka, "Rp ");
-    });
+        inputRupiah.addEventListener("input", function() {
+            // Ambil angka mentah
+            let angka = this.value.replace(/[^,\d]/g, "");
 
-    function formatRupiah(angka, prefix) {
-        let number_string = angka.replace(/[^,\d]/g, "").toString(),
-            split = number_string.split(","),
-            sisa = split[0].length % 3,
-            rupiah = split[0].substr(0, sisa),
-            ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+            // Simpan angka asli ke hidden input
+            inputHidden.value = angka;
 
-        if (ribuan) {
-            let separator = sisa ? "." : "";
-            rupiah += separator + ribuan.join(".");
+            // Format tampilannya jadi Rupiah
+            this.value = formatRupiah(angka, "Rp ");
+        });
+
+        function formatRupiah(angka, prefix) {
+            let number_string = angka.replace(/[^,\d]/g, "").toString(),
+                split = number_string.split(","),
+                sisa = split[0].length % 3,
+                rupiah = split[0].substr(0, sisa),
+                ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+            if (ribuan) {
+                let separator = sisa ? "." : "";
+                rupiah += separator + ribuan.join(".");
+            }
+
+            rupiah = split[1] !== undefined ? rupiah + "," + split[1] : rupiah;
+            return prefix === undefined ? rupiah : rupiah ? prefix + rupiah : "";
         }
+    </script>
 
-        rupiah = split[1] !== undefined ? rupiah + "," + split[1] : rupiah;
-        return prefix === undefined ? rupiah : rupiah ? prefix + rupiah : "";
-    }
-</script>
 </x-app-layout>

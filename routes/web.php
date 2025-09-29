@@ -72,7 +72,9 @@ Route::middleware('auth')->group(function () {
     Route::get('laporan', [LaporanController::class, 'index'])->name('laporan.index');
     Route::get('/laporan/print', [LaporanController::class, 'print'])->name('laporan.print');
     Route::get('/laporan/pemasukkan', [LaporanController::class, 'pemasukkan'])->name('laporan.pemasukkan');
+    Route::get('/laporan/pemasukkan/print', [LaporanController::class, 'printPemasukkan'])->name('laporan.pemasukkan.print');
     Route::get('/laporan/pengeluaran', [LaporanController::class, 'pengeluaran'])->name('laporan.pengeluaran');
+    Route::get('/laporan/pengeluaran/print', [LaporanController::class, 'printPengeluaran'])->name('laporan.pengeluaran.print');
 
     //home
     Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard');
