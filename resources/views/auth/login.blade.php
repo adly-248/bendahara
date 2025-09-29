@@ -58,106 +58,88 @@
 <x-guest-layout>
     <style>
         body {
-            background: linear-gradient(135deg, #8B0000 0%, #DC143C 25%, #B22222 75%, #660000 100%);
+            background: linear-gradient(135deg, #DC143C 0%, #FF6B9D 25%, #FFB6C1 50%, #FFF0F5 75%, #FFFFFF 100%);
             min-height: 100vh;
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
             position: relative;
         }
 
-        body::before {
+        /* body::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(circle at 20% 80%, rgba(220, 20, 60, 0.3) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, rgba(139, 0, 0, 0.4) 0%, transparent 50%),
-                        radial-gradient(circle at 40% 40%, rgba(128, 0, 32, 0.2) 0%, transparent 50%);
+            background: radial-gradient(circle at 20% 80%, rgba(220, 20, 60, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 182, 193, 0.3) 0%, transparent 50%);
             pointer-events: none;
-        }
+        } */
+
 
         .login-container {
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(25px);
-            border-radius: 28px;
-            box-shadow: 0 25px 50px rgba(139, 0, 0, 0.3),
-                        0 0 0 1px rgba(255, 255, 255, 0.3),
-                        inset 0 1px 0 rgba(255, 255, 255, 0.4);
-            border: 1px solid rgba(220, 20, 60, 0.1);
-            padding: 52px 44px;
+            background: #ffffff;
+            /* warna putih solid */
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(220, 20, 60, 0.2);
+            padding: 48px 40px;
             width: 100%;
             max-width: 450px;
-            margin: 0 auto;
-            transform: translateY(0);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-        }
-
-        .login-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border-radius: 28px;
-            padding: 1px;
-            background: linear-gradient(145deg, rgba(220, 20, 60, 0.3), rgba(139, 0, 0, 0.2), rgba(178, 34, 34, 0.3));
-            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            mask-composite: exclude;
-            pointer-events: none;
-        }
-
-        .login-container:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 35px 70px rgba(139, 0, 0, 0.4),
-                        0 0 0 1px rgba(255, 255, 255, 0.3),
-                        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+            margin: auto;
+            animation: fadeIn 0.6s ease;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .login-header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 32px;
         }
 
-        /* Logo container styling untuk x-application-logo */
         .logo-container {
             display: flex;
             justify-content: center;
-            margin-bottom: 28px;
+            margin-bottom: 24px;
+        }
+
+        .logo-container svg,
+        .logo-container img {
+            width: 120px !important;
+            height: 120px !important;
         }
 
         .login-title {
-            font-size: 36px;
+            font-size: 32px;
             font-weight: 800;
-            color: #2d1b1b;
-            margin-bottom: 12px;
-            letter-spacing: -0.8px;
-            background: linear-gradient(135deg, #8B0000 0%, #DC143C 100%);
+            background: linear-gradient(135deg, #DC143C 0%, #FF1493 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 0 2px 4px rgba(139, 0, 0, 0.1);
+            margin-bottom: 8px;
         }
 
         .login-subtitle {
             color: #666;
-            font-size: 17px;
+            font-size: 16px;
             font-weight: 500;
-            opacity: 0.8;
         }
 
-        /* Enhanced form styling */
         .form-group {
-            margin-bottom: 24px;
-            position: relative;
+            margin-bottom: 20px;
         }
 
         .form-group label {
@@ -171,68 +153,32 @@
         .form-group input[type="email"],
         .form-group input[type="password"] {
             width: 100% !important;
-            padding: 16px 20px !important;
+            padding: 14px 16px !important;
             border: 2px solid #e5e7eb !important;
-            border-radius: 12px !important;
+            border-radius: 10px !important;
             font-size: 16px !important;
-            transition: all 0.2s ease !important;
             background: #fafafa !important;
-            box-shadow: none !important;
+            transition: all 0.2s ease !important;
         }
 
-        .form-group input[type="email"]:focus,
-        .form-group input[type="password"]:focus {
+        .form-group input:focus {
             outline: none !important;
             border-color: #DC143C !important;
             background: white !important;
-            box-shadow: 0 0 0 4px rgba(220, 20, 60, 0.15),
-                        0 0 20px rgba(139, 0, 0, 0.1) !important;
-            ring: none !important;
+            box-shadow: 0 0 0 3px rgba(220, 20, 60, 0.1) !important;
         }
 
-        .form-group input[type="email"]:hover,
-        .form-group input[type="password"]:hover {
-            border-color: #d1d5db !important;
-            background: white !important;
-        }
-
-        /* Error messages styling */
-        .text-red-600,
-        .text-sm.text-red-600 {
-            background: #fef2f2;
-            border: 1px solid #fecaca;
-            color: #dc2626 !important;
-            padding: 8px 12px;
-            border-radius: 8px;
-            font-size: 13px;
-            margin-top: 8px;
-            display: block;
-        }
-
-        /* Success messages styling */
-        .mb-4 > div {
-            background: #f0f9f4;
-            border: 1px solid #bbf7d0;
-            color: #166534;
-            padding: 12px 16px;
-            border-radius: 8px;
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
-
-        /* Remember me checkbox styling */
         .checkbox-wrapper {
             display: flex;
             align-items: center;
             gap: 8px;
-            margin: 24px 0;
+            margin: 20px 0;
         }
 
         .checkbox-wrapper input[type="checkbox"] {
             width: 18px !important;
             height: 18px !important;
             accent-color: #DC143C !important;
-            border-radius: 4px !important;
         }
 
         .checkbox-wrapper label {
@@ -241,146 +187,92 @@
             margin: 0 !important;
         }
 
-        /* Footer actions styling */
         .form-actions {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 32px;
+            margin-top: 24px;
+            gap: 16px;
         }
 
         .forgot-password {
-            color: #B22222 !important;
+            color: #DC143C !important;
             text-decoration: none !important;
             font-size: 14px !important;
             font-weight: 600 !important;
-            transition: all 0.3s ease !important;
-            position: relative !important;
+            transition: color 0.2s ease !important;
+            flex-shrink: 0;
         }
 
         .forgot-password:hover {
-            color: #8B0000 !important;
-            text-decoration: none !important;
-            text-shadow: 0 0 8px rgba(139, 0, 0, 0.3) !important;
+            color: #B0174B !important;
         }
 
-        .forgot-password::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -2px;
-            left: 0;
-            background: linear-gradient(90deg, #8B0000, #DC143C);
-            transition: width 0.3s ease;
-        }
-
-        .forgot-password:hover::after {
-            width: 100%;
-        }
-
-        /* Primary button styling */
-        button[type="submit"],
-        .bg-gray-800 {
-            width: auto !important;
-            padding: 18px 36px !important;
-            background: linear-gradient(135deg, #8B0000 0%, #DC143C 50%, #B22222 100%) !important;
+        button[type="submit"] {
+            padding: 14px 32px !important;
+            background: linear-gradient(135deg, #DC143C 0%, #FF1493 100%) !important;
             color: white !important;
             border: none !important;
-            border-radius: 14px !important;
+            border-radius: 10px !important;
             font-size: 16px !important;
             font-weight: 700 !important;
             cursor: pointer !important;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
-            position: relative !important;
-            overflow: hidden !important;
-            margin-left: 16px !important;
-            box-shadow: 0 8px 25px rgba(139, 0, 0, 0.3),
-                        inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
-        }
-
-        button[type="submit"]::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.6s ease;
-        }
-
-        button[type="submit"]::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
-            transform: translate(-50%, -50%);
-            border-radius: 50%;
-            transition: width 0.6s ease, height 0.6s ease;
+            transition: all 0.3s ease !important;
+            box-shadow: 0 4px 15px rgba(220, 20, 60, 0.3) !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            margin: 0 !important;
+            flex-shrink: 0;
         }
 
         button[type="submit"]:hover {
-            transform: translateY(-3px) !important;
-            box-shadow: 0 15px 35px rgba(139, 0, 0, 0.5),
-                        inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
-            background: linear-gradient(135deg, #A0000A 0%, #E6164D 50%, #C23333 100%) !important;
-        }
-
-        button[type="submit"]:hover::before {
-            left: 100%;
-        }
-
-        button[type="submit"]:hover::after {
-            width: 300px;
-            height: 300px;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 6px 20px rgba(220, 20, 60, 0.4) !important;
         }
 
         button[type="submit"]:active {
-            transform: translateY(-1px) !important;
-            box-shadow: 0 8px 20px rgba(139, 0, 0, 0.4) !important;
+            transform: translateY(0) !important;
         }
 
-        /* Mobile responsiveness */
+        /* Mobile Responsive */
         @media (max-width: 480px) {
+            body {
+                padding: 15px;
+            }
+
             .login-container {
                 padding: 32px 24px;
-                margin: 20px;
+            }
+
+            .logo-container svg,
+            .logo-container img {
+                width: 100px !important;
+                height: 100px !important;
             }
 
             .login-title {
-                font-size: 28px;
+                font-size: 26px;
+            }
+
+            .login-subtitle {
+                font-size: 14px;
             }
 
             .form-actions {
                 flex-direction: column;
-                gap: 16px;
                 align-items: stretch;
             }
 
             button[type="submit"] {
                 width: 100% !important;
-                margin-left: 0 !important;
+                order: 1;
             }
-        }
 
-        /* Focus states for accessibility */
-        .forgot-password:focus {
-            outline: 2px solid #DC143C !important;
-            outline-offset: 3px !important;
-            border-radius: 6px !important;
-            box-shadow: 0 0 0 4px rgba(220, 20, 60, 0.1) !important;
-        }
-
-        button[type="submit"]:focus {
-            outline: 2px solid #DC143C !important;
-            outline-offset: 3px !important;
-            box-shadow: 0 8px 25px rgba(139, 0, 0, 0.3),
-                        0 0 0 4px rgba(220, 20, 60, 0.2) !important;
+            .forgot-password {
+                text-align: center;
+                order: 2;
+            }
         }
     </style>
 
@@ -403,25 +295,25 @@
 
             <!-- Email Address -->
             <div class="form-group">
-                <x-input-label for="email" :value="('Email')" />
-                <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+                <x-input-label for="email" :value="'Email'" />
+                <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')"
+                    required autofocus autocomplete="username" />
                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
             </div>
 
             <!-- Password -->
             <div class="form-group">
-                <x-input-label for="password" :value="('Password')" />
-                <x-text-input id="password" class="block mt-1 w-full"
-                                type="password"
-                                name="password"
-                                required autocomplete="current-password" />
+                <x-input-label for="password" :value="'Password'" />
+                <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required
+                    autocomplete="current-password" />
                 <x-input-error :messages="$errors->get('password')" class="mt-2" />
             </div>
 
             <!-- Remember Me -->
             <div class="checkbox-wrapper">
                 <label for="remember_me" class="inline-flex items-center">
-                    <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
+                    <input id="remember_me" type="checkbox"
+                        class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
                     <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
                 </label>
             </div>
