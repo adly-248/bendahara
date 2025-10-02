@@ -70,7 +70,7 @@
             {{-- Adly --}}
             <div class="col-lg-4 col-md-6">
                 <div class="card team-card text-center p-4 h-100">
-                    <img src="{{ asset('img/adly.jpg') }}" alt="Foto Adly Febryan" class="mx-auto mb-3">
+                    <img src="{{ asset('img/adly3.jpg') }}" alt="Foto Adly Febryan" class="mx-auto mb-3">
                     <h5 class="fw-bold">Adly Febryan</h5>
                     <p class="text-muted mb-1">Fullstack Developer</p>
                     <p class="small">Mengembangkan fitur utama, database, dan keamanan aplikasi.</p>

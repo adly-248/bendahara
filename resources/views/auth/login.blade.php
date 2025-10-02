@@ -58,7 +58,7 @@
 <x-guest-layout>
     <style>
         body {
-            background: linear-gradient(135deg, #DC143C 0%, #FF6B9D 25%, #FFB6C1 50%, #FFF0F5 75%, #FFFFFF 100%);
+            background: linear-gradient(135deg, #DC143C 0%, #FF6B9D 25%, #FFB6C1 50%, #FFF0F5 75%, #FFFFFF 100%)
             min-height: 100vh;
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             display: flex;
